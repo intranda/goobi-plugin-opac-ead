@@ -1,0 +1,64 @@
+<ead xmlns="urn:isbn:1-931666-22-9">
+  <eadheader xmlns:arcab="http://hhstaw.hessen.de/arcinsys/archivalbeschreibung" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" langencoding="iso639-2b" scriptencoding="iso15924" dateencoding="iso8601" countryencoding="iso3166-1" repositoryencoding="iso15511">
+    <eadid mainagencycode="">b14213</eadid>
+    <filedesc>
+      <titlestmt>
+        <titleproper>Dep. 92 - Nachlass Landgerichtspräsident Dr. Walter Meyerhoff</titleproper>
+      </titlestmt>
+    </filedesc>
+    <profiledesc>
+      <creation>
+        <date normal="2018-10-09">09.10.2018</date>
+      </creation>
+    </profiledesc>
+  </eadheader>
+  <c level="collection" id="b14213">
+    <did xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:arcab="http://hhstaw.hessen.de/arcinsys/archivalbeschreibung">
+      <unitid type="Signatur">Dep. 92</unitid>
+      <unittitle>Dep. 92 - Nachlass Landgerichtspräsident Dr. Walter Meyerhoff</unittitle>
+      <unitdate normal="1919-01-01/1977-12-31">1919-1977</unitdate>
+    </did>
+    <scopecontent xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:arcab="http://hhstaw.hessen.de/arcinsys/archivalbeschreibung">
+      <head>Beschreibung</head>
+      <p>Nachlass des ehemaligen Landgerichtspräsidenten Walter Meyerhoff (1890-1977).</p>
+    </scopecontent>
+    <scopecontent xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:arcab="http://hhstaw.hessen.de/arcinsys/archivalbeschreibung">
+      <head>Bestandsgeschichte</head>
+      <p>Die Unterlagen dieses Bestandes wurden 1978 zusammengetragen aus dem zum Abbruch freigegebenen Gebäude Herzberger Landstraße 103-105 und ins Stadtarchiv übernommen (Acc.-Nr. 504/1978).</p>
+    </scopecontent>
+    <scopecontent xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:arcab="http://hhstaw.hessen.de/arcinsys/archivalbeschreibung">
+      <head>Bestandsgeschichte</head>
+      <p>Der Bestand wurde zunächst nur sortiert, die Verzeichnung 2018 begonnen.</p>
+    </scopecontent>
+    <scopecontent xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:arcab="http://hhstaw.hessen.de/arcinsys/archivalbeschreibung">
+      <head>Referent</head>
+      <p>Rolf Kohlstedt</p>
+    </scopecontent>
+  </c>
+  <c level="class" id="g379011">
+    <did xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:arcab="http://hhstaw.hessen.de/arcinsys/archivalbeschreibung">
+      <abstract/>
+      <unittitle>8 Händel-Festspiele</unittitle>
+    </did>
+  </c>
+  <c level="file" id="v8141030">
+    <did xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:arcab="http://hhstaw.hessen.de/arcinsys/archivalbeschreibung">
+      <unitid type="Signatur">Nr. 84</unitid>
+      <unittitle>Fotografien zur Veranstaltung Ptolomäus</unittitle>
+      <physdesc>
+        <genreform>Verzeichnung</genreform>
+      </physdesc>
+      <unitdate normal="1938-01-01/1938-12-31">1938</unitdate>
+    </did>
+    <accessrestrict xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:arcab="http://hhstaw.hessen.de/arcinsys/archivalbeschreibung">
+      <p>Gesperrt bis 1968</p>
+    </accessrestrict>
+    <otherfindaid xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:arcab="http://hhstaw.hessen.de/arcinsys/archivalbeschreibung">
+      <extref xlink:role="url_archivalunit" xlink:href="https://www.arcinsys.niedersachsen.de/arcinsys/detailAction.action?detailid=v8141030">Titelaufnahme im Angebot des Archivs</extref>
+    </otherfindaid>
+    <odd xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:arcab="http://hhstaw.hessen.de/arcinsys/archivalbeschreibung">
+      <head>Weitere Angaben (Bild): Blattzahl</head>
+      <p>98</p>
+    </odd>
+  </c>
+</ead>
