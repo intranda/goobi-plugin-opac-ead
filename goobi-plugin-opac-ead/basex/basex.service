@@ -1,0 +1,14 @@
+[Unit]
+Description=BaseX HTTP server
+Requires=network-online.target
+
+[Service]
+User=tomcat8
+Group=tomcat8
+ProtectSystem=full
+ExecStart=/opt/digiverso/basex/bin/basexhttp -n localhost
+ExecStop=/opt/digiverso/basex/bin/basexhttp stop
+
+[Install]
+WantedBy=multi-user.target
+
