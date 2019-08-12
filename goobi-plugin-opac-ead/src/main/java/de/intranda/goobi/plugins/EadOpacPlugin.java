@@ -33,6 +33,7 @@ import ugh.dl.DocStruct;
 import ugh.dl.Fileformat;
 import ugh.dl.Metadata;
 import ugh.dl.MetadataType;
+import ugh.dl.Person;
 import ugh.dl.Prefs;
 import ugh.fileformats.mets.MetsMods;
 
@@ -122,36 +123,54 @@ public class EadOpacPlugin implements IOpacPlugin {
                     log.error("Cannot initialize metadata type " + sp.getMetadataName());
                 } else {
 
-                }
-                for (String value : metadataValues) {
 
-                    try {
-                        Metadata md = new Metadata(mdt);
-                        md.setValue(value);
-                        if ("physical".equals(sp.getLevel())) {
-                            // add it to phys
-                            physical.addMetadata(md);
+                    for (String value : metadataValues) {
+                        try {
+                            if (mdt.getIsPerson()) {
+                                Person p = new Person(mdt);
+                                if (value.contains(",")) {
+                                    p.setLastname(value.substring(0, value.indexOf(",")).trim());
+                                    p.setFirstname(value.substring(value.indexOf(",") + 1).trim());
+                                } else {
+                                    p.setLastname(value);
+                                }
+                                if ("physical".equals(sp.getLevel())) {
+                                    // add it to phys
+                                    physical.addPerson(p);
+                                } else if ("topstruct".equals(sp.getLevel())) {
+                                    // add it to topstruct
+                                    volume.addPerson(p);
+                                } else if ("anchor".equals(sp.getLevel()) && anchor != null) {
+                                    // add it to anchor
+                                    anchor.addPerson(p);
+                                }
+                            } else {
+
+                                Metadata md = new Metadata(mdt);
+                                md.setValue(value);
+                                if ("physical".equals(sp.getLevel())) {
+                                    // add it to phys
+                                    physical.addMetadata(md);
+                                } else if ("topstruct".equals(sp.getLevel())) {
+                                    // add it to topstruct
+                                    volume.addMetadata(md);
+                                } else if ("anchor".equals(sp.getLevel()) && anchor != null) {
+                                    // add it to anchor
+                                    anchor.addMetadata(md);
+                                }
+                            }
+                        } catch (Exception e) {
+                            log.error(e);
                         }
 
-                        else if ("topstruct".equals(sp.getLevel())) {
-                            // add it to topstruct
-                            volume.addMetadata(md);
-                        } else if ("anchor".equals(sp.getLevel()) && anchor != null) {
-                            // add it to anchor
-                            anchor.addMetadata(md);
-                        }
-                    } catch (Exception e) {
-                        log.error(e);
                     }
-
                 }
             }
             return mm;
-        }
 
-        // ->     http://localhost:8984/search/v8141030
+            // ->     http://localhost:8984/search/v8141030
 
-        /*
+            /*
         <query xmlns="http://basex.org/rest">
         <text>
         <![CDATA[
@@ -185,8 +204,8 @@ public class EadOpacPlugin implements IOpacPlugin {
 
 
 
-         */
-
+             */
+        }
         return null;
     }
 
