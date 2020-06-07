@@ -12,11 +12,11 @@ More information about the functionality of this plugin and the complete documen
 
 Detail | Description
 --- | ---
-**Plugin identifier**       | -
+**Plugin identifier**       | goobi-plugin-opac-ead
 **Plugin type**             | Opac plugin
 **Licence**                 | GPL 2.0 or newer  
-**Documentation (German)**  | -
-**Documentation (English)** | -
+**Documentation (German)**  | https://docs.goobi.io/goobi-workflow-plugins-de/opac/goobi-plugin-opac-ead
+**Documentation (English)** | https://docs.goobi.io/goobi-workflow-plugins-en/opac/goobi-plugin-opac-ead
 
 ## Goobi details
 
