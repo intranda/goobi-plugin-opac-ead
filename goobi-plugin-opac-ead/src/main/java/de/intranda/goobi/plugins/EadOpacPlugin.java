@@ -54,7 +54,7 @@ public class EadOpacPlugin implements IOpacPlugin {
     private PluginType type = PluginType.Opac;
 
     @Getter
-    private String title = "ead";
+    private String title = "intranda_opac_ead";
 
     private int hit = 0;
 
