@@ -15,8 +15,8 @@ Detail | Description
 **Plugin identifier**       | intranda_opac_ead
 **Plugin type**             | Opac plugin
 **Licence**                 | GPL 2.0 or newer  
-**Documentation (German)**  | https://docs.goobi.io/goobi-workflow-plugins-de/opac/goobi-plugin-opac-ead
-**Documentation (English)** | https://docs.goobi.io/goobi-workflow-plugins-en/opac/goobi-plugin-opac-ead
+**Documentation (German)**  | https://docs.goobi.io/goobi-workflow-plugins-de/opac/intranda_opac_ead 
+**Documentation (English)** | https://docs.goobi.io/goobi-workflow-plugins-en/opac/intranda_opac_ead 
 
 ## Goobi details
 
