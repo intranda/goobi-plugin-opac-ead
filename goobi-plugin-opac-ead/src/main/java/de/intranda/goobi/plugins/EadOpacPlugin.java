@@ -9,6 +9,7 @@ import org.apache.commons.configuration.HierarchicalConfiguration;
 import org.apache.commons.configuration.XMLConfiguration;
 import org.apache.commons.configuration.tree.xpath.XPathExpressionEngine;
 import org.apache.commons.lang.StringUtils;
+import org.apache.oro.text.perl.Perl5Util;
 import org.goobi.production.enums.PluginType;
 import org.goobi.production.plugin.interfaces.IOpacPlugin;
 import org.jdom2.Attribute;
@@ -57,6 +58,8 @@ public class EadOpacPlugin implements IOpacPlugin {
     private String title = "intranda_opac_ead";
 
     private int hit = 0;
+
+    private Perl5Util perlUtil = new Perl5Util();
 
     @Override
     public Fileformat search(String inSuchfeld, String inSuchbegriff, ConfigOpacCatalogue coc, Prefs prefs) throws Exception {
@@ -123,46 +126,53 @@ public class EadOpacPlugin implements IOpacPlugin {
                     log.error("Cannot initialize metadata type " + sp.getMetadataName());
                 } else {
 
-
                     for (String value : metadataValues) {
-                        try {
-                            if (mdt.getIsPerson()) {
-                                Person p = new Person(mdt);
-                                if (value.contains(",")) {
-                                    p.setLastname(value.substring(0, value.indexOf(",")).trim());
-                                    p.setFirstname(value.substring(value.indexOf(",") + 1).trim());
-                                } else {
-                                    p.setLastname(value);
-                                }
-                                if ("physical".equals(sp.getLevel())) {
-                                    // add it to phys
-                                    physical.addPerson(p);
-                                } else if ("topstruct".equals(sp.getLevel())) {
-                                    // add it to topstruct
-                                    volume.addPerson(p);
-                                } else if ("anchor".equals(sp.getLevel()) && anchor != null) {
-                                    // add it to anchor
-                                    anchor.addPerson(p);
-                                }
-                            } else {
-
-                                Metadata md = new Metadata(mdt);
-                                md.setValue(value);
-                                if ("physical".equals(sp.getLevel())) {
-                                    // add it to phys
-                                    physical.addMetadata(md);
-                                } else if ("topstruct".equals(sp.getLevel())) {
-                                    // add it to topstruct
-                                    volume.addMetadata(md);
-                                } else if ("anchor".equals(sp.getLevel()) && anchor != null) {
-                                    // add it to anchor
-                                    anchor.addMetadata(md);
-                                }
-                            }
-                        } catch (Exception e) {
-                            log.error(e);
+                        if (StringUtils.isNotBlank(sp.getRegularExpression())) {
+                            value = perlUtil.substitute(sp.getRegularExpression(), value);
                         }
+                        if (StringUtils.isNotBlank(sp.getSearch()) && StringUtils.isNotBlank(sp.getReplace())) {
+                            value = value.replace(sp.getSearch(), sp.getReplace());
+                        }
+                        if (StringUtils.isNotBlank(value)) {
+                            try {
+                                if (mdt.getIsPerson()) {
+                                    Person p = new Person(mdt);
+                                    if (value.contains(",")) {
+                                        p.setLastname(value.substring(0, value.indexOf(",")).trim());
+                                        p.setFirstname(value.substring(value.indexOf(",") + 1).trim());
+                                    } else {
+                                        p.setLastname(value);
+                                    }
+                                    if ("physical".equals(sp.getLevel())) {
+                                        // add it to phys
+                                        physical.addPerson(p);
+                                    } else if ("topstruct".equals(sp.getLevel())) {
+                                        // add it to topstruct
+                                        volume.addPerson(p);
+                                    } else if ("anchor".equals(sp.getLevel()) && anchor != null) {
+                                        // add it to anchor
+                                        anchor.addPerson(p);
+                                    }
+                                } else {
 
+                                    Metadata md = new Metadata(mdt);
+                                    md.setValue(value);
+                                    if ("physical".equals(sp.getLevel())) {
+                                        // add it to phys
+                                        physical.addMetadata(md);
+                                    } else if ("topstruct".equals(sp.getLevel())) {
+                                        // add it to topstruct
+                                        volume.addMetadata(md);
+                                    } else if ("anchor".equals(sp.getLevel()) && anchor != null) {
+                                        // add it to anchor
+                                        anchor.addMetadata(md);
+                                    }
+                                }
+                            } catch (Exception e) {
+                                log.error(e);
+                            }
+
+                        }
                     }
                 }
             }
@@ -171,35 +181,35 @@ public class EadOpacPlugin implements IOpacPlugin {
             // ->     http://localhost:8984/search/v8141030
 
             /*
-        <query xmlns="http://basex.org/rest">
-        <text>
-        <![CDATA[
-        declare default element namespace "urn:isbn:1-931666-22-9";
-        declare variable $identifier as xs:string external;
-        let $ead := db:open('basexdb')/ead[//c[@level="file"][@id=$identifier]]
-        let $record :=$ead//c[@level="file"][@id=$identifier]
-        let $header := $ead/eadheader
-        return
-        <ead>
-        {$header}
-        {
-        for $c in $record/ancestor-or-self::c
-        return
-        <c level="{data($c/@level)}" id="{data($c/@id)}">
-        {$c/did}
-        {$c/accessrestrict}
-        {$c/otherfindaid}
-        {$c/odd}
-        {$c/scopecontent}
-        {$c/index}
-        </c>
-        }
-        </ead>
+            <query xmlns="http://basex.org/rest">
+            <text>
+            <![CDATA[
+            declare default element namespace "urn:isbn:1-931666-22-9";
+            declare variable $identifier as xs:string external;
+            let $ead := db:open('basexdb')/ead[//c[@level="file"][@id=$identifier]]
+            let $record :=$ead//c[@level="file"][@id=$identifier]
+            let $header := $ead/eadheader
+            return
+            <ead>
+            {$header}
+            {
+            for $c in $record/ancestor-or-self::c
+            return
+            <c level="{data($c/@level)}" id="{data($c/@id)}">
+            {$c/did}
+            {$c/accessrestrict}
+            {$c/otherfindaid}
+            {$c/odd}
+            {$c/scopecontent}
+            {$c/index}
+            </c>
+            }
+            </ead>
 
-        ]]>
-        </text>
-        <variable name="identifier" value="v8141030"/>
-        </query>
+            ]]>
+            </text>
+            <variable name="identifier" value="v8141030"/>
+            </query>
 
 
 
@@ -229,11 +239,20 @@ public class EadOpacPlugin implements IOpacPlugin {
             String xpathValue = sub.getString("@xpath");
             String level = sub.getString("@level", "topstruct");
             String xpathType = sub.getString("@xpathType", "Element");
+
+            String regularExpression = sub.getString("@regularExpression");
+            String search = sub.getString("@search");
+            String replace = sub.getString("@replace");
+
             ConfigurationEntry entry = new ConfigurationEntry();
             entry.setLevel(level);
             entry.setMetadataName(metadataName);
             entry.setXpath(xpathValue);
             entry.setXpathType(xpathType);
+            entry.setRegularExpression(regularExpression);
+            entry.setSearch(search);
+            entry.setReplace(replace);
+
             metadataList.add(entry);
         }
     }
@@ -261,31 +280,26 @@ public class EadOpacPlugin implements IOpacPlugin {
 
     @Override
     public String getAtstsl() {
-        // TODO Auto-generated method stub
         return null;
     }
 
     @Override
     public ConfigOpacDoctype getOpacDocType() {
-        // TODO Auto-generated method stub
         return null;
     }
 
     @Override
     public String createAtstsl(String value, String value2) {
-        // TODO Auto-generated method stub
         return null;
     }
 
     @Override
     public void setAtstsl(String createAtstsl) {
-        // TODO Auto-generated method stub
 
     }
 
     @Override
     public String getGattung() {
-        // TODO Auto-generated method stub
         return null;
     }
 

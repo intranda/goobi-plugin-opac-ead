@@ -13,4 +13,10 @@ public class ConfigurationEntry {
 
     private String xpathType = "Element"; // Element, Attribute, String
 
+    private String regularExpression;
+
+    private String search;
+
+    private String replace;
+
 }
