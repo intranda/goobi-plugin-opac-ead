@@ -131,7 +131,7 @@ public class EadOpacPlugin implements IOpacPlugin {
                             value = perlUtil.substitute(sp.getRegularExpression(), value);
                         }
                         if (StringUtils.isNotBlank(sp.getSearch()) && StringUtils.isNotBlank(sp.getReplace())) {
-                            value = value.replace(sp.getSearch(), sp.getReplace());
+                            value = value.replace(sp.getSearch(), sp.getReplace().replace("\\u0020", " "));
                         }
                         if (StringUtils.isNotBlank(value)) {
                             try {
