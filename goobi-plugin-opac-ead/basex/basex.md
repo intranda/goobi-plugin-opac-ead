@@ -57,41 +57,10 @@ Neue Dateien lassen sich über den *Add* Dialog ausgewählen und hochladen. Hier
 
 Um das Interface zur Abfrage für Goobi einzurichten, muss der Datenbank bekannt gemacht werden, wie eine Anfrage aussieht, was damit geschehen soll und wie das Ergebnis auszusehen hat. Dafür bietet BaseX verschiedene Optionen an. Wir haben uns für [RESTXQ](http://docs.basex.org/wiki/RESTXQ) entschieden, da diese im Gegensatz zur [REST](http://docs.basex.org/wiki/REST) Schnittstelle keine Authentication benötigt.
 
-Dazu muss im Verzeichnis /opt/digiverso/basex/webapp/ eine neue Datei *eadRequest.xq* erzeugt werden.
-
-```xquery
-(: XQuery file to return an ead record :)
-module namespace page = 'http://basex.org/examples/web-page';
-declare default element namespace "urn:isbn:1-931666-22-9";
-
-declare
-  %rest:path("/search/{$identifier}")
-  %rest:single
-  %rest:GET
-function page:getRecord($identifier) {
-    let $ead := db:open('CHANGEME')/ead[//c[@level="file"][@id=$identifier]]
-    let $record :=$ead//c[@level="file"][@id=$identifier]
-    let $header := $ead/eadheader
-    return
-        <ead>
-            {$header}
-            {for $c in $record/ancestor-or-self::c
-            return
-                <c level="{data($c/@level)}" id="{data($c/@id)}">
-                    {$c/did}
-                    {$c/accessrestrict}
-                    {$c/otherfindaid}
-                    {$c/odd}
-                    {$c/scopecontent}
-                    {$c/index}
-                </c>
-            }
-        </ead>
-};
-```
+Dazu muss die Datei *eadRecord.xq* in das Verzeichnis: /opt/digiverso/basex/webapp/
 
 Dieses xquery Modul wird ausgeführt, wenn Anfragen via GET an die Adresse /search/{$identifier} gestellt werden. Wenn ein anderer endpoint genutzt werden soll, kann dies im Bereich *declare* angepasst werden.
-Sobald eine Anfrage gestellt wird, wird die Funktion page:getRecord ausgeführt. In der ersten Zeile der Funktion muss der zu verwendende Datenbankname definiert werden. Für den Fall, dass die Informationen auf mehrere Datenbanken aufgeteilt wurden, müssen daher auch mehrere Dateien mit dieser Funktion verwendet werden. Dabei muss die Variable rest:path eindeutig definiert werden.
+Sobald eine Anfrage gestellt wird, wird die Funktion page:getRecord ausgeführt. In der ersten Zeile der Funktion *muss der zu verwendende Datenbankname definiert werden*. Für den Fall, dass die Informationen auf mehrere Datenbanken aufgeteilt wurden, müssen daher auch mehrere Dateien mit dieser Funktion verwendet werden. Dabei muss die Variable rest:path eindeutig definiert werden.
 
 Ob die Konfiguration korrekt ist, kann mit einer Anfrage an die Datenbank getestet werden:
 http://localhost:8984/search/A91x07542461156845020181205140345849
@@ -122,7 +91,7 @@ Außerdem muss die Datenquelle definiert werden:
 ```xml
 <catalogue title="EAD Import">
     <config address="http://localhost:8984/search/" database="hu-ead-example" description="EAD Import" iktlist="IKTLIST-GBV.xml"
-            port="80" ucnf="UCNF=NFC&amp;XPNOFF=1" protocol="http://" opacType="ead" />
+            port="80" ucnf="UCNF=NFC&amp;XPNOFF=1" protocol="http://" opacType="intranda_opac_ead" />
     <searchFields>
         <searchField  label="Identifier" value="8000" />
     </searchFields>
@@ -164,7 +133,7 @@ Diese Datei ist im Ordner /opt/digiverso/goobi/config/ zu finden und enthält da
         <metadata name="Description" xpath="//ead:c[@level='collection']/ead:scopecontent[/ead:head/text() = 'Beschreibung']/ead:p" level="topstruct" xpathType="Element"/>
         <metadata name="SizeSourcePrint" xpath="//ead:c[@level='file']/ead:odd/ead:p" level="topstruct" xpathType="Element"/>
         <metadata name="Contains" xpath="//ead:c[@level='file']/ead:did/ead:abstract[@type='Enthält']" level="topstruct" xpathType="Element"/>
-        <metadata name="singleDigCollection" xpath="concat(//ead:eadheader/ead:filedesc/ead:titlestmt/ead:titleproper\,'#'\, //ead:c[@level='collection']/ead:did/ead:unitid)" level="topstruct" xpathType="String"/>
+        <metadata name="singleDigCollection" xpath="concat(//ead:eadheader/ead:filedesc/ead:titlestmt/ead:titleproper,'#', //ead:c[@level='collection']/ead:did/ead:unitid)" level="topstruct" xpathType="String"/>
     </mapping>
 </config_plugin>
 ```

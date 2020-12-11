@@ -10,20 +10,19 @@ function page:getRecord($identifier) {
     let $ead := db:open('CHANGEME')/ead[//c[@level="file"][@id=$identifier]]
     let $record :=$ead//c[@level="file"][@id=$identifier]
     let $header := $ead/eadheader
-
     return
-    <ead>
-        {$header}
-        {for $c in $record/ancestor-or-self::c
-        return
-            <c level="{data($c/@level)}" id="{data($c/@id)}">
-                {$c/did}
-                {$c/accessrestrict}
-                {$c/otherfindaid}
-                {$c/odd}
-                {$c/scopecontent}
-                {$c/index}
-            </c>
-        }
-    </ead>
+        <ead>
+            {$header}
+            {for $c in $record/ancestor-or-self::c
+            return
+                <c level="{data($c/@level)}" id="{data($c/@id)}">
+                    {$c/did}
+                    {$c/accessrestrict}
+                    {$c/otherfindaid}
+                    {$c/odd}
+                    {$c/scopecontent}
+                    {$c/index}
+                </c>
+            }
+        </ead>
 };
