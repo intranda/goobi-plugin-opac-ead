@@ -28,6 +28,7 @@ import de.unigoettingen.sub.search.opac.ConfigOpacCatalogue;
 import de.unigoettingen.sub.search.opac.ConfigOpacDoctype;
 import lombok.Getter;
 import lombok.extern.log4j.Log4j;
+import lombok.extern.log4j.Log4j2;
 import net.xeoh.plugins.base.annotations.PluginImplementation;
 import ugh.dl.DigitalDocument;
 import ugh.dl.DocStruct;
@@ -39,7 +40,7 @@ import ugh.dl.Prefs;
 import ugh.fileformats.mets.MetsMods;
 
 @PluginImplementation
-@Log4j
+@Log4j2
 public class EadOpacPlugin implements IOpacPlugin {
 
     private List<Namespace> namespaces = null;
