@@ -15,6 +15,7 @@
 	</classpathentry>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER">
 		<attributes>
+			<attribute name="module" value="true"/>
 			<attribute name="maven.pomderived" value="true"/>
 		</attributes>
 	</classpathentry>
@@ -24,51 +25,6 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="src" path="src/main/resources"/>
-	<classpathentry kind="lib" path="/home/joel/.m2/repository/commons-configuration/commons-configuration/1.10/commons-configuration-1.10.jar" sourcepath="/home/joel/.m2/repository/commons-configuration/commons-configuration/1.10/commons-configuration-1.10-sources.jar">
-		<attributes>
-			<attribute name="maven.pomderived" value="true"/>
-			<attribute name="maven.groupId" value="commons-configuration"/>
-			<attribute name="maven.artifactId" value="commons-configuration"/>
-			<attribute name="maven.version" value="1.10"/>
-			<attribute name="maven.scope" value="compile"/>
-		</attributes>
-	</classpathentry>
-	<classpathentry kind="lib" path="/home/joel/.m2/repository/commons-lang/commons-lang/2.4/commons-lang-2.4.jar" sourcepath="/home/joel/.m2/repository/commons-lang/commons-lang/2.4/commons-lang-2.4-sources.jar">
-		<attributes>
-			<attribute name="maven.pomderived" value="true"/>
-			<attribute name="maven.groupId" value="commons-lang"/>
-			<attribute name="maven.artifactId" value="commons-lang"/>
-			<attribute name="maven.version" value="2.4"/>
-			<attribute name="maven.scope" value="compile"/>
-		</attributes>
-	</classpathentry>
-	<classpathentry kind="lib" path="/home/joel/.m2/repository/oro/oro/2.0.8/oro-2.0.8.jar" sourcepath="/home/joel/.m2/repository/oro/oro/2.0.8/oro-2.0.8-sources.jar">
-		<attributes>
-			<attribute name="maven.pomderived" value="true"/>
-			<attribute name="maven.groupId" value="oro"/>
-			<attribute name="maven.artifactId" value="oro"/>
-			<attribute name="maven.version" value="2.0.8"/>
-			<attribute name="maven.scope" value="compile"/>
-		</attributes>
-	</classpathentry>
-	<classpathentry kind="lib" path="/home/joel/.m2/repository/org/jdom/jdom2/2.0.6/jdom2-2.0.6.jar" sourcepath="/home/joel/.m2/repository/org/jdom/jdom2/2.0.6/jdom2-2.0.6-sources.jar">
-		<attributes>
-			<attribute name="maven.pomderived" value="true"/>
-			<attribute name="maven.groupId" value="org.jdom"/>
-			<attribute name="maven.artifactId" value="jdom2"/>
-			<attribute name="maven.version" value="2.0.6"/>
-			<attribute name="maven.scope" value="compile"/>
-		</attributes>
-	</classpathentry>
-	<classpathentry kind="lib" path="/home/joel/.m2/repository/de/intranda/other/jspf-core/1.0.2/jspf-core-1.0.2.jar" sourcepath="/Goobi-maven">
-		<attributes>
-			<attribute name="maven.pomderived" value="true"/>
-			<attribute name="maven.groupId" value="de.intranda.other"/>
-			<attribute name="maven.artifactId" value="jspf-core"/>
-			<attribute name="maven.version" value="1.0.2"/>
-			<attribute name="maven.scope" value="compile"/>
-		</attributes>
-	</classpathentry>
 	<classpathentry kind="src" path="/ugh_new"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>

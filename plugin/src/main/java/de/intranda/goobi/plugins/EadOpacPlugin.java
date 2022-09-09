@@ -24,10 +24,10 @@ import org.jdom2.xpath.XPathFactory;
 
 import de.sub.goobi.config.ConfigPlugins;
 import de.sub.goobi.helper.HttpClientHelper;
+import de.unigoettingen.sub.search.opac.ConfigOpac;
 import de.unigoettingen.sub.search.opac.ConfigOpacCatalogue;
 import de.unigoettingen.sub.search.opac.ConfigOpacDoctype;
 import lombok.Getter;
-import lombok.extern.log4j.Log4j;
 import lombok.extern.log4j.Log4j2;
 import net.xeoh.plugins.base.annotations.PluginImplementation;
 import ugh.dl.DigitalDocument;
@@ -62,6 +62,10 @@ public class EadOpacPlugin implements IOpacPlugin {
 
     private Perl5Util perlUtil = new Perl5Util();
 
+    private String gattung;
+
+    private ConfigOpacCatalogue coc;
+
     @Override
     public Fileformat search(String inSuchfeld, String inSuchbegriff, ConfigOpacCatalogue coc, Prefs prefs) throws Exception {
         // http://basex.org/download/  BaseXxx.zip herunterladen und entpacken
@@ -69,6 +73,8 @@ public class EadOpacPlugin implements IOpacPlugin {
         // http://localhost:8984/dba öffnen (admin/admin)
         // neue DB anlegen, Name "basexdb"
         // Datei eadRecord.xq in webapp Ordner legen
+
+        this.coc = coc;
 
         if (namespaces == null) {
             loadConfiguration();
@@ -87,7 +93,7 @@ public class EadOpacPlugin implements IOpacPlugin {
             Fileformat mm = new MetsMods(prefs);
             DigitalDocument digitalDocument = new DigitalDocument();
             mm.setDigitalDocument(digitalDocument);
-
+            gattung = documentType;
             DocStruct volume = digitalDocument.createDocStruct(prefs.getDocStrctTypeByName(documentType));
             DocStruct anchor = null;
             if (anchorType != null) {
@@ -286,7 +292,19 @@ public class EadOpacPlugin implements IOpacPlugin {
 
     @Override
     public ConfigOpacDoctype getOpacDocType() {
-        return null;
+        ConfigOpac co;
+        ConfigOpacDoctype cod = null;
+
+        co = ConfigOpac.getInstance();
+        cod = co.getDoctypeByMapping(this.gattung, coc.getTitle());
+        if (cod == null) {
+
+            cod = co.getAllDoctypes().get(0);
+            this.gattung = cod.getMappings().get(0);
+
+        }
+
+        return cod;
     }
 
     @Override
@@ -301,7 +319,7 @@ public class EadOpacPlugin implements IOpacPlugin {
 
     @Override
     public String getGattung() {
-        return null;
+        return gattung;
     }
 
 }
