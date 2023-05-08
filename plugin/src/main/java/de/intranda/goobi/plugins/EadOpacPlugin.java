@@ -23,10 +23,10 @@ import org.jdom2.input.sax.XMLReaders;
 import org.jdom2.xpath.XPathFactory;
 
 import de.sub.goobi.config.ConfigPlugins;
-import de.sub.goobi.helper.HttpClientHelper;
 import de.unigoettingen.sub.search.opac.ConfigOpac;
 import de.unigoettingen.sub.search.opac.ConfigOpacCatalogue;
 import de.unigoettingen.sub.search.opac.ConfigOpacDoctype;
+import io.goobi.workflow.api.connection.HttpUtils;
 import lombok.Getter;
 import lombok.extern.log4j.Log4j2;
 import net.xeoh.plugins.base.annotations.PluginImplementation;
@@ -81,7 +81,7 @@ public class EadOpacPlugin implements IOpacPlugin {
         }
         if (StringUtils.isNotBlank(inSuchbegriff)) {
             String url = coc.getAddress() + inSuchbegriff;
-            String response = HttpClientHelper.getStringFromUrl(url);
+            String response = HttpUtils.getStringFromUrl(url);
 
             Element element = getRecordFromResponse(response);
             if (element == null) {
@@ -212,15 +212,15 @@ public class EadOpacPlugin implements IOpacPlugin {
             </c>
             }
             </ead>
-
+            
             ]]>
             </text>
             <variable name="identifier" value="v8141030"/>
             </query>
-
-
-
-
+            
+            
+            
+            
              */
         }
         return null;
