@@ -9,7 +9,6 @@ import org.apache.commons.configuration.HierarchicalConfiguration;
 import org.apache.commons.configuration.XMLConfiguration;
 import org.apache.commons.configuration.tree.xpath.XPathExpressionEngine;
 import org.apache.commons.lang.StringUtils;
-import org.apache.oro.text.perl.Perl5Util;
 import org.goobi.production.enums.PluginType;
 import org.goobi.production.plugin.interfaces.IOpacPlugin;
 import org.jdom2.Attribute;
@@ -38,19 +37,22 @@ import ugh.dl.MetadataType;
 import ugh.dl.Person;
 import ugh.dl.Prefs;
 import ugh.fileformats.mets.MetsMods;
+import ugh.fileformats.mets.MetsModsImportExport;
 
 @PluginImplementation
 @Log4j2
 public class EadOpacPlugin implements IOpacPlugin {
 
+    private static final long serialVersionUID = -2790791195198669676L;
+
     private List<Namespace> namespaces = null;
 
-    private List<ConfigurationEntry> metadataList = null;
+    private transient List<ConfigurationEntry> metadataList = null;
 
     private String documentType = null;
     private String anchorType = null;
 
-    private XPathFactory xFactory = XPathFactory.instance();
+    private transient XPathFactory xFactory = XPathFactory.instance();
 
     @Getter
     private PluginType type = PluginType.Opac;
@@ -59,8 +61,6 @@ public class EadOpacPlugin implements IOpacPlugin {
     private String title = "intranda_opac_ead";
 
     private int hit = 0;
-
-    private Perl5Util perlUtil = new Perl5Util();
 
     private String gattung;
 
@@ -135,7 +135,10 @@ public class EadOpacPlugin implements IOpacPlugin {
 
                     for (String value : metadataValues) {
                         if (StringUtils.isNotBlank(sp.getRegularExpression())) {
-                            value = perlUtil.substitute(sp.getRegularExpression(), value);
+
+                            List<String> parts = MetsModsImportExport.splitRegularExpression(sp.getRegularExpression());
+                            value = value.replaceAll(parts.get(0), parts.get(1));
+
                         }
                         if (StringUtils.isNotBlank(sp.getSearch()) && StringUtils.isNotBlank(sp.getReplace())) {
                             value = value.replace(sp.getSearch(), sp.getReplace().replace("\\u0020", " "));
