@@ -146,6 +146,7 @@ Changes to the files or the databases can be made at any time during operation.
 ### Goobi connection
 Once the database has been set up, it can be configured in Goobi. Since the metadata differs significantly from the bibliographic metadata of libraries, Goobi should use its own project and rule set. In addition, the OPAC plugin `goobi-plugin-opac-ead` must be installed.
 
+![Selection of the plugin](screen1_en.png)
 
 ### Configuration of the file goobi_opac.xml
 The file `goobi_opac.xml` must be extended by two more entries. On the one hand, the document type to be used must be defined. This happens in the `doctypes` area:

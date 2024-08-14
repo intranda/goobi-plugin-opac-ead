@@ -145,6 +145,7 @@ Ob die Konfiguration korrekt ist, kann mit einer Anfrage an die Datenbank getest
 ### Goobi Anbindung
 Nachdem die Datenbank eingerichtet wurde, kann sie in Goobi konfiguriert werden. Da sich die Metadaten deutlich von den bibliographischen Metadaten von Bibliotheken unterscheiden, sollte in Goobi ein eigenes Projekt und ein eigener Regelsatz genutzt werden. Zusätzlich muss das OPAC-Plugin `goobi-plugin-opac-ead` installiert werden.
 
+![Auswahl des Plugins](screen1_de.png)
 
 ### Konfiguration der Datei goobi_opac.xml
 Die Datei `goobi_opac.xml` muss um zwei weitere Einträge erweitert werden. Zum einen muss der zu verwendende Dokumententyp definiert werden. Dies passiert im Bereich `<doctypes>`:
