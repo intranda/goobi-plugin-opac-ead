@@ -3,6 +3,10 @@ title: EAD data transfer
 identifier: intranda_opac_ead
 published: true
 description: OPAC Plugin for the data transfer of EAD records using the example of the university archive of HU Berlin
+keywords:
+    - Goobi workflow
+    - Plugin
+    - Opac Plugin
 ---
 ## Introduction
 This documentation describes the installation, configuration and use of an XML-based database to manage EAD files and integrate them into Goobi.
