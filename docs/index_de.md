@@ -3,6 +3,10 @@ title: EAD Datenübernahme
 identifier: intranda_opac_ead
 published: true
 description: OPAC Plugin für die Datenübernahme von EAD Datensätzen am Beispiel des Universitätsarchives der HU Berlin
+keywords:
+    - Goobi workflow
+    - Plugin
+    - Opac Plugin
 ---
 ## Einführung
 Die vorliegende Dokumentation beschreibt die Installation, die Konfiguration und den Einsatz einer XML-basierten Datenbank, um damit EAD Dateien zu verwalten und in Goobi zu integrieren.
