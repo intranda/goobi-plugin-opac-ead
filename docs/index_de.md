@@ -96,7 +96,7 @@ Die XML Datenbank kann nach der Installation unter folgender URL erreicht werden
 
 Die Zugangsdaten lauten `admin`/`admin`. Nach dem ersten Anmelden sollte daher als erstes ein neues Passwort vergeben werden. Dazu muss der Menüeintrag `Users` geöffnet werden. Hier kann der Accountname angeklickt und das neue Passwort gesetzt werden.
 
-Anschließend kann eine neue Datenbank für die EAD Dateien erzeugt werden. Dazu muss der Menüeintrag `Databases` ausgewählt werden. Mittels `Create` gelangt man in den Dialog dazu. Hier muss einTitel für die Datenbank vergeben werden. Alle anderen Einstellungen können so bleiben.
+Anschließend kann eine neue Datenbank für die EAD Dateien erzeugt werden. Dazu muss der Menüeintrag `Databases` ausgewählt werden. Mittels `Create` gelangt man in den Dialog dazu. Hier muss ein Titel für die Datenbank vergeben werden. Alle anderen Einstellungen können so bleiben.
 
 
 ### Dateien hinzufügen und löschen
